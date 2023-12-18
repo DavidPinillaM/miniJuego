@@ -1,29 +1,48 @@
-import React from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { Keyboard, StyleSheet, Text, TextInput, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native'
 import { Card } from '../../components/card/card';
 import { colors } from '../../constants/themes';
 
 export const StartGame = () => {
+const [enteredValue, setEnteredValue] = useState('');  
+//console.log("enteredValue:", enteredValue)
+
+
+const onHandlerChange = (text) => {
+  //Se hace una validacion en la cual lo que yo escriba sea un numero del 1 al 9 de forma global y si lo que el usuario escribe no es un numero entonces que sea un string vacio(text.replace(/[^0-9]/g, ''))
+  setEnteredValue(text.replace(/[^0-9]/g, ''));
+}
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Comenzar juego</Text>
-      <Card style={styles.inputContainer}>
-        <Text style={styles.label}>Escribe un numero</Text>
-        <TextInput
-          keyboardType="numeric"
-          style={styles.input}
-          placeholder="0"
-        />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.buttonRestart}>Reiniciar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.buttonConfirm}>Confirmar</Text>
-          </TouchableOpacity>
-        </View>
-      </Card>
-    </View>
+    //TouchableNativeFeedback se usa cuando se desea capturar eventos táctiles en un componente sin cambiar su estilo visual de manera predeterminada
+    <TouchableNativeFeedback
+      onPress={() => {
+        //Keyboard se refiere al teclado virtual en dispositivos móviles y cuando se le coloca dismiss le estamos diciendo que se desapareca el teclado al hacer click fuera del TextInput
+        Keyboard.dismiss();
+      }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Comenzar juego</Text>
+        <Card style={styles.inputContainer}>
+          <Text style={styles.label}>Escribe un numero</Text>
+          <TextInput
+            value={enteredValue}
+            keyboardType="numeric"
+            style={styles.input}
+            placeholder="0"
+            onChangeText={onHandlerChange}
+          />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={styles.buttonRestart}>Reiniciar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={styles.buttonConfirm}>Confirmar</Text>
+            </TouchableOpacity>
+          </View>
+        </Card>
+      </View>
+    </TouchableNativeFeedback>
   );
 }
 
