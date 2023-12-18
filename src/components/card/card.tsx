@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
+import { colors } from '../../constants/themes';
 
 
 //Le pasamos como prop children para que en cualquier parte de mi código cuando llame a mi componente Card y coloque algo dentro del las etiquetas <Card><Card/> sera lo que se va a renderizar.
@@ -12,8 +13,8 @@ export const Card = ({ children, style }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
+    backgroundColor: colors.white,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 1,

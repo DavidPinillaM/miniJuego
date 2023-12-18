@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { Card } from '../../components/card/card';
+import { colors } from '../../constants/themes';
 
 export const StartGame = () => {
   return (
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#212121',
+    color: colors.text,
     textAlign: 'center',
     paddingVertical: 20,
   },
@@ -45,13 +46,13 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 15,
-    color: '#212121',
+    color: colors.text,
     paddingVertical: 5,
     textAlign: 'center',
   },
   input: {
     width: '100%',
-    borderBottomColor: '#97A1D8',
+    borderBottomColor: colors.primary,
     borderBottomWidth: 1,
     // establecer la anchura mínima de un componente. Esta propiedad especifica la anchura mínima que el componente debe tener, asegurando que no se reduzca por debajo de ese valor, incluso si el contenido del componente es menor.
     minWidth: 70,
@@ -66,9 +67,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonRestart: {
-    color: '#97A1D8',
+    color: colors.secundary,
   },
   buttonConfirm: {
-    color: '#97A1D8',
+    color: colors.primary,
   },
 });
