@@ -3,6 +3,7 @@ import { Keyboard, StyleSheet, Text, TextInput, TouchableNativeFeedback, Touchab
 import { Card } from '../../components/card/card';
 import { colors } from '../../constants/themes';
 import * as Yup from 'yup';
+import { NumberContainer } from '../../components/numberContainer/numberContainer';
 
 
  //Esquema de validación con Yup
@@ -18,6 +19,7 @@ export const StartGame = () => {
   //console.log("enteredValue:", enteredValue)
   const [confirmed, setConfirmed] = useState(false);
   const [errorNumber, setErrorNumber] = useState('');
+  const [seletedNumber, setSeletedNumber] = useState(null);
 
   //funcion que se encarga de validar que el usario escriba un numero de 1 al 9 y de setiar el error de mensaje
   const onHandlerChange = text => {
@@ -35,6 +37,7 @@ export const StartGame = () => {
     setEnteredValue('');
     //limpiarmos cualquier error al ejecutar la funcion onHandleReset
     setErrorNumber('');
+    setConfirmed(false);
   };
 
 
@@ -65,12 +68,31 @@ export const StartGame = () => {
       onHandleReset();
     }
 
-    //Verifica si el número elegido es 0
+    //Verifica si el número elegido es 0 entonces que se muestre un mensaje de error y si no es 0 entonces se modifiquen algunos hook
     if (chosenNumber === 0) {
       setErrorNumber('Número inválido, el número debe estar entre 1 y 99');
-      return;
+    }else {
+      setConfirmed(true);
+      setSeletedNumber(chosenNumber);
+      setEnteredValue('');
     }
   };
+
+  const onHandleStartGame = () => null;
+
+
+
+//Este componente confirma si hay un estado de confrimacion en true renderiza un componente y si no no renderiza nada
+  const Confirmed = () =>
+    confirmed ? (
+      <Card style={styles.confirmedContainer}>
+        <Text style={styles.confirmedTitle}>Numero confirmado</Text>
+        <NumberContainer number={seletedNumber} />
+        <TouchableOpacity onPress={onHandleStartGame}>
+          <Text style={styles.textConfirmed}>Iniciar juego</Text>
+        </TouchableOpacity>
+      </Card>
+    ) : null;
 
   return (
     //TouchableNativeFeedback se usa cuando se desea capturar eventos táctiles en un componente sin cambiar su estilo visual de manera predeterminada
@@ -106,6 +128,7 @@ export const StartGame = () => {
             </TouchableOpacity>
           </View>
         </Card>
+        <Confirmed />
       </View>
     </TouchableNativeFeedback>
   );
@@ -171,4 +194,13 @@ const styles = StyleSheet.create({
   buttonConfirm: {
     color: colors.primary,
   },
+  confirmedContainer: {
+
+  },
+  confirmedTitle: {
+
+  },
+  textConfirmed: {
+    color: colors.primary
+  }
 });
