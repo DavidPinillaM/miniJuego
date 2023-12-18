@@ -1,22 +1,27 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Card } from '../../components/card/card';
 
 export const StartGame = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Comenzar juego</Text>
-      <View style={styles.inputContainer}>
+      <Card style={styles.inputContainer}>
         <Text style={styles.label}>Escribe un numero</Text>
-        <TextInput style={styles.input} placeholder="0" />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.buttonRestart}>Reiniciar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.buttonConfirm}>Confirmar</Text>
-        </TouchableOpacity>
-      </View>
+        <TextInput
+          keyboardType="numeric"
+          style={styles.input}
+          placeholder="0"
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.buttonRestart}>Reiniciar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.buttonConfirm}>Confirmar</Text>
+          </TouchableOpacity>
+        </View>
+      </Card>
     </View>
   );
 }
