@@ -31,6 +31,8 @@ const onHandlerChange = (text) => {
             style={styles.input}
             placeholder="0"
             onChangeText={onHandlerChange}
+            //Esta propiedad permite que el usuario solamente pueda dijitar en este caso no mas de 3 numeros
+            //maxLength={3}
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={() => {}}>
