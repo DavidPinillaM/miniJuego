@@ -14,7 +14,7 @@ const validationSchema = Yup.object().shape({
 
 
 
-export const StartGame = () => {
+export const StartGame = ({onHandleStarGame}) => {
   const [enteredValue, setEnteredValue] = useState('');
   //console.log("enteredValue:", enteredValue)
   const [confirmed, setConfirmed] = useState(false);
@@ -78,7 +78,11 @@ export const StartGame = () => {
     }
   };
 
-  const onHandleStartGame = () => null;
+//Esta funcion se ejecuta cuando el usuario le da click en iniciar juego
+  const onHandleStartGame = () => {
+  //Cuando el usuario le da en iniciar juego llama a la funcion onHandleStarGame y le pasa como prop el numero seleccionado para luego ser recibida en app.tsx
+    onHandleStarGame(seletedNumber);
+  };
 
 
 
