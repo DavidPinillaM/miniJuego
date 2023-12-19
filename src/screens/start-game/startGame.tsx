@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#F23D3D',
     borderRadius: 10,
-    padding: 5
+    padding: 5,
   },
   errorText: {
     color: 'white',
@@ -195,12 +195,16 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   confirmedContainer: {
-
+    width: '75%',
+    height: 180,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 30,
   },
   confirmedTitle: {
-
+    fontSize: 16,
   },
   textConfirmed: {
-    color: colors.primary
-  }
+    color: colors.primary,
+  },
 });
