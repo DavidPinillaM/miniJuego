@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Card } from '../../components/card/card';
 import { NumberContainer } from '../../components/numberContainer/numberContainer';
 import { colors } from '../../constants/themes';
@@ -22,12 +22,38 @@ const generateRandomNumber = (min, max, exclude) => {
   }
 };
 
-export const Game = ({selectedNumber}) => {
+export const Game = ({selectedNumber, onHandleGameOver}) => {
   //Se crea un hook donde se va a guardar ese numero generado aleatoriamente y el valo inicial del useState va a ser el numero generado automaticamente y se le pasa el numero minimo, el numero maximo, y el numero escluido que es el numero seleccionado por el usuario y luego ese nuemro generado aleatoriamente se va a mostrar en NumberContainer
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomNumber(1, 100, selectedNumber),
   );
   //console.log('currentGuess:', currentGuess)
+  const [rounds, setRounds] = useState(0); 
+
+//hacemos refenria al valor menor que es 1  
+  const currentLow = useRef(1);
+//hacemos refencia al valor mayor que es 100  
+  const currentHigh = useRef(100);
+
+
+//Se coloca en la dependencias el numero generado aleatoriamente, el numero seleccionado por el usuario y la afuncion de onHandleGameOver para luego se evaluada cada una de las dependencias por la estructura if
+//en la estructura if de evalua si el numero generado aleatoriamente es estrictamente igual al numero seleccionado por el usuario entonces se ejecuta la funcion onHandleGameOver y se le pasan las rondas jugadas para luego finalizar el juego 
+  useEffect(() => {
+    if (currentGuess === selectedNumber) onHandleGameOver(rounds);
+  }, [currentGuess, selectedNumber, onHandleGameOver]);
+
+  
+  const onHandleNextGuess = (direction) => {
+    if (
+      direction === 'lower' && currentGuess  < selectedNumber || 
+      direction === 'greater' && currentGuess > selectedNumber  
+    ) {
+      Alert.alert('No mientas!', 'Sabes que eso es incorrecto', [
+        {text: 'Perdon!', style: 'cancel'},
+      ]);
+    }
+  }
+
 
   return (
     <View style={styles.container}>
@@ -36,12 +62,12 @@ export const Game = ({selectedNumber}) => {
         <NumberContainer number={currentGuess} />
         <View style={styles.containerButtons}>
           <View style={styles.buttonMayor}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onHandleNextGuess('lower')}>
               <Text style={styles.textButtonMayor}>Mayor</Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onHandleNextGuess('greater')}>
               <Text style={styles.textButtonMenor}>Menor</Text>
             </TouchableOpacity>
           </View>
@@ -49,7 +75,7 @@ export const Game = ({selectedNumber}) => {
       </Card>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
