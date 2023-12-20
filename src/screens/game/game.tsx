@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export const Game = () => {
+export const Game = ({selectedNumber}) => {
   return (
     <View style={styles.container}>
         <Text>Game Screen</Text> 
