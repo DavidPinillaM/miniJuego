@@ -39,7 +39,9 @@ export const Game = ({selectedNumber, onHandleGameOver}) => {
 //Se coloca en la dependencias el numero generado aleatoriamente, el numero seleccionado por el usuario y la afuncion de onHandleGameOver para luego se evaluada cada una de las dependencias por la estructura if
 //en la estructura if de evalua si el numero generado aleatoriamente es estrictamente igual al numero seleccionado por el usuario entonces se ejecuta la funcion onHandleGameOver y se le pasan las rondas jugadas para luego finalizar el juego 
   useEffect(() => {
-    if (currentGuess === selectedNumber) rounds;
+    if (currentGuess === selectedNumber) {
+      onHandleGameOver(rounds);
+    };
     //Cada ves que cambien alguna dependencia(currentGuess,selectedNumber o se ejecute la funcion onHandleGameOver) se va a evaluar la condicion de la estructura if
   }, [currentGuess, selectedNumber, onHandleGameOver]);
 
