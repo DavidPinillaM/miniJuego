@@ -15,20 +15,25 @@ export const App = () =>{
     setUserNumber(selectedNumber);
   };
 
-  const onHandleGameOver = (rounds) => {
+  const onHandleGameOver = rounds => {
     setGuessRounds(rounds);
+  };
+
+  const onHadleRestarGame = () => {
+    setUserNumber(null);
+    setGuessRounds(0);
   }
 
 
   const Content = () => {
-   if (userNumber && guessRounds <= 0) {
+   if (userNumber && guessRounds <= 0) { 
     return <Game selectedNumber={userNumber} onHandleGameOver={onHandleGameOver}/>;
    }
 
    if (guessRounds > 0) {
-     return <GameOver />;
+     return <GameOver onHadleRestarGame={onHadleRestarGame} rounds={guessRounds} selectedNumber={userNumber}/>;
    }
-   return <StartGame onHandleStarGame={onHandleStarGame} />;
+   return <StartGame onHandleStarGame={onHandleStarGame}/>;
   }
 
   return (
