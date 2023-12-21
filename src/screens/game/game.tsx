@@ -39,20 +39,32 @@ export const Game = ({selectedNumber, onHandleGameOver}) => {
 //Se coloca en la dependencias el numero generado aleatoriamente, el numero seleccionado por el usuario y la afuncion de onHandleGameOver para luego se evaluada cada una de las dependencias por la estructura if
 //en la estructura if de evalua si el numero generado aleatoriamente es estrictamente igual al numero seleccionado por el usuario entonces se ejecuta la funcion onHandleGameOver y se le pasan las rondas jugadas para luego finalizar el juego 
   useEffect(() => {
-    if (currentGuess === selectedNumber) onHandleGameOver(rounds);
+    if (currentGuess === selectedNumber) rounds;
+    //Cada ves que cambien alguna dependencia(currentGuess,selectedNumber o se ejecute la funcion onHandleGameOver) se va a evaluar la condicion de la estructura if
   }, [currentGuess, selectedNumber, onHandleGameOver]);
 
   
   const onHandleNextGuess = (direction) => {
     if (
-      direction === 'lower' && currentGuess  < selectedNumber || 
-      direction === 'greater' && currentGuess > selectedNumber  
+      direction === 'lower' && currentGuess < selectedNumber ||
+      direction === 'greater' && currentGuess > selectedNumber
     ) {
       Alert.alert('No mientas!', 'Sabes que eso es incorrecto', [
         {text: 'Perdon!', style: 'cancel'},
       ]);
+      return;
     }
-  }
+
+    if (direction === 'lower') {
+      currentHigh.current = currentGuess;
+    } else {
+      currentLow.current = currentGuess;
+    }
+
+    const nextNumber = generateRandomNumber(currentLow.current, currentHigh.current, currentGuess); 
+    setCurrentGuess(nextNumber);
+    setRounds((rounds) => rounds +1);
+  };
 
 
   return (
@@ -62,12 +74,12 @@ export const Game = ({selectedNumber, onHandleGameOver}) => {
         <NumberContainer number={currentGuess} />
         <View style={styles.containerButtons}>
           <View style={styles.buttonMayor}>
-            <TouchableOpacity onPress={onHandleNextGuess('lower')}>
+            <TouchableOpacity onPress={() => onHandleNextGuess('lower')}>
               <Text style={styles.textButtonMayor}>Mayor</Text>
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity onPress={onHandleNextGuess('greater')}>
+            <TouchableOpacity onPress={() => onHandleNextGuess('greater')}>
               <Text style={styles.textButtonMenor}>Menor</Text>
             </TouchableOpacity>
           </View>
