@@ -23,7 +23,7 @@ const generateRandomNumber = (min, max, exclude) => {
 };
 
 export const Game = ({selectedNumber, onHandleGameOver}) => {
-  //Se crea un hook donde se va a guardar ese numero generado aleatoriamente y el valo inicial del useState va a ser el numero generado automaticamente y se le pasa el numero minimo, el numero maximo, y el numero escluido que es el numero seleccionado por el usuario y luego ese nuemro generado aleatoriamente se va a mostrar en NumberContainer
+  //Se crea un hook donde se va a guardar ese numero generado aleatoriamente y el valor inicial del useState va a ser el numero generado automaticamente y se le pasa el numero minimo, el numero maximo, y el numero escluido que es el numero seleccionado por el usuario y luego ese numero generado aleatoriamente se va a mostrar en NumberContainer
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomNumber(1, 100, selectedNumber),
   );

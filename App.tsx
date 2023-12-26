@@ -11,7 +11,7 @@ export const App = () =>{
 
   //Esta funcion recibe como prop el numero seleccionado(selectedNumber) de la screen StartGame
   const onHandleStarGame = selectedNumber => {
-    //Ese numeor seleccionado es guardado en setUserNumber
+    //Ese numero seleccionado es guardado en setUserNumber
     setUserNumber(selectedNumber);
   };
 

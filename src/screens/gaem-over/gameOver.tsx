@@ -7,7 +7,7 @@ export const GameOver = ({ rounds, selectedNumber, onHadleRestarGame }) => {
   return (
     <View style={styles.container}>
       <Card style={styles.content}>
-        {/*<Image style={styles.image}/>*/}
+        <Image source={require('../../assets/img/gameOver.jpg')} style={styles.image}/>
         <Text style={styles.text}>Rondas: {rounds}</Text>
         <Text style={styles.text}>Numero seleccionado: {selectedNumber}</Text>
       </Card>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 200,
+    width: 300,
     height: 200,
   },
   text: {
